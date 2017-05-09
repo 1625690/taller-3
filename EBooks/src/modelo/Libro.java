@@ -58,11 +58,16 @@ public class Libro implements Serializable {
      */
     private String rangoEdad;
     
+    /**
+     * Identificador del libro
+     */
+    private String ISBN;
+    
     //----------------------------------------------------------------------
     // CONSTRUCTOR
     //----------------------------------------------------------------------
 
-    public Libro(int numPag, String titulo, String resumen, String autor, double precio, String categoria, boolean esBestSeller, String rangoEdad) {
+    public Libro(String isbn, int numPag, String titulo, String resumen, String autor, double precio, String categoria, boolean esBestSeller, String rangoEdad) {
         this.numPag = numPag;
         this.titulo = titulo;
         this.resumen = resumen;
@@ -71,6 +76,7 @@ public class Libro implements Serializable {
         this.categoria = categoria;
         this.esBestSeller = esBestSeller;
         this.rangoEdad = rangoEdad;
+        this.ISBN = isbn;
     }
     
     //----------------------------------------------------------------------
