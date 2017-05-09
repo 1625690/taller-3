@@ -10,6 +10,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.HashMap;
 import java.util.Iterator;
 import modelo.*;
 
@@ -28,22 +29,25 @@ public class Controladora {
             File archivo = new File("libros.txt");
             if(archivo.exists()){
                 ObjectInputStream lectura = new ObjectInputStream(new FileInputStream(archivo));
+                libreria.setLibros((HashMap)lectura.readObject());
                 Iterator i = libreria.getLibros().values().iterator();
                 while(i.hasNext()){
                     Libro l = (Libro)i.next();
-                    System.out.println(l.getISBN() + " - " + l.getTitulo());
+                    System.out.println(l.getISBN() + " - " + l.getTitulo() + " - " + l.getAutor());
                 }
+                lectura.close();
             }
         }
         catch(Exception e){
             
         }
         
-        libreria.agregarLibro("000012", 200, "El tunel", "asdddsasad", "Ernesto Sabato", 10000, "Realismo magico", false, "16-99");
+        libreria.modificarLibro("12232", 200, "El principito", "asdfdgdfdf", "Antoine de Saint-Exupery", 10000, 
+                "Infantil", true, "4-99");
         
-        try{            
+           try{            
             ObjectOutputStream escritura = new ObjectOutputStream(new FileOutputStream("libros.txt", false));
-            escritura.writeObject(libreria.getUsuarios());
+            escritura.writeObject(libreria.getLibros());  
             escritura.close();
         }
         catch(Exception e){
