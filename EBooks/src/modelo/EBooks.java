@@ -64,6 +64,14 @@ public class EBooks {
         boolean modificado = false;
         
         Libro lib = buscarLibroISBN(isbn);
+        lib.setAutor(autor);
+        lib.setCategoria(categoria);
+        lib.setEsBestSeller(esBestSeller);
+        lib.setTitulo(titulo);
+        lib.setResumen(resumen);
+        lib.setNumPag(numPag);
+        lib.setPrecio(precio);
+        
         
         return modificado;
     }
