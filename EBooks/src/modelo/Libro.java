@@ -66,7 +66,18 @@ public class Libro implements Serializable {
     //----------------------------------------------------------------------
     // CONSTRUCTOR
     //----------------------------------------------------------------------
-
+    /**
+     * Clase que representa un libro
+     * @param isbn - Identificador
+     * @param numPag
+     * @param titulo
+     * @param resumen
+     * @param autor
+     * @param precio
+     * @param categoria
+     * @param esBestSeller
+     * @param rangoEdad 
+     */
     public Libro(String isbn, int numPag, String titulo, String resumen, String autor, double precio, String categoria, boolean esBestSeller, String rangoEdad) {
         this.numPag = numPag;
         this.titulo = titulo;
@@ -158,13 +169,11 @@ public class Libro implements Serializable {
     
     /**
      * Comparacion
+     * @param objeto
      */
+    @Override
     public boolean equals(Object objeto){
         Libro o = (Libro)objeto;
-        if (o.getTitulo().equals(this.titulo)) {
-            return true;
-        }else{
-            return false;
-        }
+        return o.getTitulo().equals(this.titulo);
     }
 }

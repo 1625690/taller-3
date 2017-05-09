@@ -12,14 +12,39 @@ import java.util.*;
  * @author invitado
  */
 public class EBooks {
+
+     
+    //----------------------------------------------------------------------
+    // ATRIBUTOS
+    //----------------------------------------------------------------------
     
+    private HashSet usuarios;
     
+    /**
+     * Hashmap de libros
+     */
     private HashMap libros;
     
+    //----------------------------------------------------------------------
+    // CONSTRUCTOR
+    //----------------------------------------------------------------------
     
+    /**
+     * 
+     */
     public EBooks(){
-        this.libros = new HashMap();
+        usuarios = new HashSet();
+        libros = new HashMap();
+        
+        //Inicia el usuario administrador
+        usuarios.add(new Usuario("admin", "admin"));
+        agregarLibro("00001", 500, "EL amor en los tiempos del cólera", "Asdfggjhkl", "Gabriel Garcia"
+                + "Marquez", 15000, "Realismo magico", false, "11-99");
     }
+    
+    //----------------------------------------------------------------------
+    // METODOS
+    //----------------------------------------------------------------------
     
     /**
      * Busca un libro por ISBN y retorna el objeto
@@ -39,6 +64,19 @@ public class EBooks {
         return buscado;
     }
     
+    /**
+     * Agrega un libro al hashmap de libro
+     * @param isbn
+     * @param numPag
+     * @param titulo
+     * @param resumen
+     * @param autor
+     * @param precio
+     * @param categoria
+     * @param esBestSeller
+     * @param rangoEdad
+     * @return - True si el libro pudo ser agregado
+     */
     public boolean agregarLibro(String isbn, int numPag, String titulo, String resumen, String autor, double precio, String categoria, boolean esBestSeller, String rangoEdad){
         boolean agregado = false;
         Libro l = new Libro(isbn, numPag, titulo, resumen, autor, precio, categoria, esBestSeller, rangoEdad);
@@ -48,6 +86,11 @@ public class EBooks {
         return agregado;
     }
     
+    /**
+     * ELimina un libro dado su ISBN
+     * @param isbn
+     * @return - true si el libro fue eliminado correctamente
+     */
     public boolean eliminarLibro(String isbn){
         boolean eliminado = false;
         if(libros.remove(isbn) != null){
@@ -56,12 +99,28 @@ public class EBooks {
         return eliminado;
     }
     
+    /**
+     * Busca si el libro existe en la libreria por isbn
+     * @param isbn
+     * @return true si se encuentra
+     */
     public boolean existeLibro(String isbn){        
         return libros.containsKey(isbn);
     }
     
-    public boolean modificarLibro(String isbn, int numPag, String titulo, String resumen, String autor, double precio, String categoria, boolean esBestSeller, String rangoEdad){
-        boolean modificado = false;
+    /**
+     * Modifica un libro dado los parámetros
+     * @param isbn
+     * @param numPag
+     * @param titulo
+     * @param resumen
+     * @param autor
+     * @param precio
+     * @param categoria
+     * @param esBestSeller
+     * @param rangoEdad 
+     */
+    public void modificarLibro(String isbn, int numPag, String titulo, String resumen, String autor, double precio, String categoria, boolean esBestSeller, String rangoEdad){
         
         Libro lib = buscarLibroISBN(isbn);
         lib.setAutor(autor);
@@ -70,17 +129,28 @@ public class EBooks {
         lib.setTitulo(titulo);
         lib.setResumen(resumen);
         lib.setNumPag(numPag);
-        lib.setPrecio(precio);
-        
-        
-        return modificado;
+        lib.setPrecio(precio);        
+   
+    } 
+    
+    //----------------------------------------------------------------------
+    // GETS Y SETTERS
+    //----------------------------------------------------------------------
+    
+    public HashSet getUsuarios() {
+        return usuarios;
     }
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
+    public void setUsuarios(HashSet usuarios) {
+        this.usuarios = usuarios;
     }
-    
+
+    public HashMap getLibros() {
+        return libros;
+    }
+
+    public void setLibros(HashMap libros) {
+        this.libros = libros;
+    }
+   
 }
