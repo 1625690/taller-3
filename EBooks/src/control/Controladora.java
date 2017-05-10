@@ -10,6 +10,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.ServerSocket;
 import java.util.HashMap;
 import java.util.Iterator;
 import modelo.*;
@@ -21,9 +22,20 @@ import modelo.*;
 public class Controladora {
     
     
+    
+    
     public static void main(String[] args) {
         
         EBooks libreria = new EBooks();
+        
+        try{
+            
+            ServerSocket server = new ServerSocket(4000);
+            
+            
+        }catch(Exception e){
+            e.printStackTrace();
+        }
         
         try{
             File archivo = new File("libros.txt");

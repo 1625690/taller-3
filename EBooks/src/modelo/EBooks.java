@@ -48,7 +48,7 @@ public class EBooks {
     
     /**
      * Busca un libro por ISBN y retorna el objeto
-     * @param isbn -  String con el isbn
+     * @param isbn String con el isbn
      * @return null si no lo encuentra
      */
     public Libro buscarLibroISBN(String isbn){
