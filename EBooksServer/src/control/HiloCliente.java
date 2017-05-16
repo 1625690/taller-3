@@ -91,8 +91,8 @@ public class HiloCliente extends Thread{
     @Override
     public void run() {
         try{
-            boolean terminar = true;
-            while(terminar){
+            boolean terminar = false;
+            while(!terminar){
                 
                 //Recibe el paquete
                 Paquete packet = (Paquete)lector.readObject();
@@ -117,7 +117,7 @@ public class HiloCliente extends Thread{
                       
                 }else if(comando.equals(CERRAR)){
                     escritor.close();
-                    terminar = false;                    
+                    terminar = true;                    
                 }               
             }
             

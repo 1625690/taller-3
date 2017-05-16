@@ -86,7 +86,7 @@ public class Ejecutable {
     public static void main(String args[])throws UnknownHostException, IOException{
         
         try{
-            socket = new Socket(InetAddress.getByAddress(null), PORT);
+            socket = new Socket("127.0.0.1", PORT);
             System.out.println("Conectado");
             lector = new ObjectInputStream(socket.getInputStream());
             escritor = new ObjectOutputStream(socket.getOutputStream());

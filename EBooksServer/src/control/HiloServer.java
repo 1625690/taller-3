@@ -5,7 +5,12 @@
  */
 package control;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import modelo.*;
@@ -23,25 +28,43 @@ public class HiloServer extends Thread{
     
     public HiloServer(EBooks libreria) {
         try{
-            server = new ServerSocket(4200);
+            //CARGA LOS DATOS DEL SERVER
+            File archivo = new File("liberia.txt");
+            if(archivo.exists()){
+                ObjectInputStream lectura = new ObjectInputStream(new FileInputStream(archivo));
+                libreria = (EBooks)lectura.readObject();
+                lectura.close();
+            }
+            
             this.libreria = libreria;
         }
-        catch(IOException Exception){
+        catch(IOException e){
             
-        }       
+        }catch(ClassNotFoundException e){
+            
+        }
     }
     
     public void run(){
         try{
-            while(true){
+            //Inicia el serverSocket
+            server = new ServerSocket(4200);
+            boolean terminar = false;
+            while(!terminar){
                 System.out.println("Esperando clientes");
-                cliente = server.accept();   
+                cliente = server.accept();  
+                System.out.println("Se ha conectado un cliente");
                 hiloCliente = new HiloCliente(libreria, cliente);
                 hiloCliente.start();
-                System.out.println("Se ha conectado un cliente");
+                               
             }
+            //ESCRITURA AL CERRAR EL SERVER
+            ObjectOutputStream escritura = new ObjectOutputStream(new FileOutputStream("libreria.txt", false));
+            escritura.writeObject(libreria);  
+            escritura.close();
+            
         }catch(Exception e){
                 
-        }        
+        }
     }
 }

@@ -23,41 +23,16 @@ public class Controladora {
     
     public static void main(String[] args) {
         
-        EBooks libreria = new EBooks();
-        //LECTURA DE LA PERSISTENCIA
-        try{
-            File archivo = new File("liberia.txt");
-            if(archivo.exists()){
-                ObjectInputStream lectura = new ObjectInputStream(new FileInputStream(archivo));
-                libreria = (EBooks)lectura.readObject();
-                lectura.close();
-            }
-        }
-        catch(Exception e){
-            
-        }
-        
+        EBooks libreria = new EBooks();       
         //APERTURA DEL SERVIDOR
         try{
             //Crea el Hilo del servidor que escucha las conexiones
             HiloServer server = new HiloServer(libreria);
-            server.start();                
+            server.start();           
             
             
         }catch(Exception e){
-            e.printStackTrace();
-        }
-        
-
-        
-        //ESCRITURA DE LA PERSISTENCIA
-        try{            
-            ObjectOutputStream escritura = new ObjectOutputStream(new FileOutputStream("libreria.txt", false));
-            escritura.writeObject(libreria);  
-            escritura.close();
-        }
-        catch(Exception e){
-            e.printStackTrace();
+            
         }
     }
 }
