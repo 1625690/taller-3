@@ -41,6 +41,9 @@ public class Ejecutable {
     
     private static ObjectOutputStream escritor;
     
+    //Atributos para muestreo
+    private static Libro recibido;
+    
     // JHON REVISA ESTE METODO
     public static boolean consultarLibroTitulo(String titulo) {
         
@@ -60,7 +63,7 @@ public class Ejecutable {
             //Si no es nulo, arma el objeto libro
             if(packet.getObjeto()!=null){
                 //Con este libro trabajamos para mostrarlo en la interfaz
-                Libro recibido = (Libro)packet.getObjeto();
+                recibido = (Libro)packet.getObjeto();
                 aux = true;
             }
             
@@ -102,6 +105,10 @@ public class Ejecutable {
         }finally{
             
         }
+    }
+    
+    public Libro getRecibido(){
+        return recibido;
     }
     
 }

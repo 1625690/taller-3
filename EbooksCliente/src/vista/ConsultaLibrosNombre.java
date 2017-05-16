@@ -6,6 +6,7 @@
 package vista;
 
 import control.*;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -84,7 +85,35 @@ public class ConsultaLibrosNombre extends javax.swing.JInternalFrame {
 
     private void jButtonConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConsultarActionPerformed
         // TODO add your handling code here:
+        try{
+            String nombre = this.jTextFieldNombre.getText();
+            if(this.control.consultarLibroTitulo(nombre)){
+                Libro auxLibro = this.control.getRecibido();
+                
+                //Auxiliares
+                String bestSeller;
+                if(isEsBestSeller()){
+                    bestSeller = "Sí";
+                }else{
+                    bestSeller = "No";
+                }
+                
+                //Crear los textos con los atributos del libro
+                String infoLibro = "Título: " + auxLibro.getTitulo() +  "\nNúmero de Páginas: " auxLibro.getNumPag() + 
+                        "\nResumen: " + auxLibro.getResumen() + "\nAutor: " auxLibro.getAutor() +
+                        "\nPrecio: " + auxLibro.getPrecio() + "\nCategoría: " + auxLibro.getCategoria() +
+                        "\nBest Seller: " + bestSeller + "\nRango de Edad: " + auxLibro.getRangoEdad() + 
+                        "\nISBN: " + auxLibro.getIsbn();
+                       
+                this.jTextArea1.setText();
+            }else{
+                JOptionPane.showMessageDialog(this, "El Libro no existe.");
+            }
+        }
         
+        catch(Exception e){
+            JOptionPane.showMessageDialog(this, "Error consultando Libro.");
+        }
     }//GEN-LAST:event_jButtonConsultarActionPerformed
 
 
