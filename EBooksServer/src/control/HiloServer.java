@@ -34,9 +34,11 @@ public class HiloServer extends Thread{
     public void run(){
         try{
             while(true){
+                System.out.println("Esperando clientes");
                 cliente = server.accept();   
                 hiloCliente = new HiloCliente(libreria, cliente);
                 hiloCliente.start();
+                System.out.println("Se ha conectado un cliente");
             }
         }catch(Exception e){
                 
