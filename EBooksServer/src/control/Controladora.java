@@ -21,23 +21,15 @@ import modelo.*;
  */
 public class Controladora {   
     
-    public static void main(String[] args) {
-        
-              
-//      libreria.agregarLibro("235272", 52, "Cronica", "asdasd", "Jhon", 20000, "Fantasia", true, "10-99");
-        
-        //APERTURA DEL SERVIDOR
+    public static void main(String[] args) {                 
+       
         try{               
-            
+
             //Crea el Hilo del servidor que escucha las conexiones
             HiloServer server = new HiloServer();
             server.start();           
-//            ObjectOutputStream escritura = new ObjectOutputStream(new FileOutputStream("libreria.txt", false));
-//            escritura.writeObject(libreria);  
-//            escritura.close();   
             
-        }catch(Exception e){
-            
+        }catch(Exception e){            
         }
     }
 }
