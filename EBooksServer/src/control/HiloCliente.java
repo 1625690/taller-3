@@ -96,10 +96,12 @@ public class HiloCliente extends Thread{
                 
                 //Recibe el paquete
                 Paquete packet = (Paquete)lector.readObject();
+                //Obtiene el comando del paquete
                 String comando = packet.getComando();
                 if(comando.equals(CONSULTAR_LIBRO)){
-                    Paquete p = (Paquete)lector.readObject();
-                    Libro lib = (Libro)p.getObjeto();
+                    //Se obtiene el libro del paquete
+                    Libro lib = (Libro)packet.getObjeto();
+                    //Se saca el titulo y busca el libro
                     Libro buscado = libreria.buscarLibroTitulo(lib.getTitulo());
                     escritor.writeObject(buscado);
                     escritor.flush();

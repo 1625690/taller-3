@@ -43,7 +43,8 @@ public class Ejecutable {
     // JHON REVISA ESTE METODO
     public static void consultarLibroTitulo(String titulo) {
         
-        Paquete packet = new Paquete(CONSULTAR_LIBRO, null);
+        //Crea el paquete, se manda el comando y se crea un libro que tiene solo un titulo
+        Paquete packet = new Paquete(CONSULTAR_LIBRO, new Libro(null, 0, titulo, null, null, 0, null, true, null));
         
         try{
             //Manda un paquete con el comando consultar libro por titulo al servidor
@@ -64,6 +65,7 @@ public class Ejecutable {
     }
     
     public static void main(String args[])throws UnknownHostException, IOException{
+        
         try{
             socket = new Socket(InetAddress.getByAddress(null), PORT);
             System.out.println("Conectado");
