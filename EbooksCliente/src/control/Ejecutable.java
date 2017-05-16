@@ -42,10 +42,13 @@ public class Ejecutable {
     private static ObjectOutputStream escritor;
     
     // JHON REVISA ESTE METODO
-    public static void consultarLibroTitulo(String titulo) {
+    public static boolean consultarLibroTitulo(String titulo) {
         
         //Crea el paquete, se manda el comando y se crea un libro que tiene solo un titulo
         Paquete packet = new Paquete(CONSULTAR_LIBRO, new Libro(null, 0, titulo, null, null, 0, null, true, null));
+        
+        //Booleano auxiliar
+        boolean aux = false;
         
         try{
             //Manda un paquete con el comando consultar libro por titulo al servidor
@@ -58,10 +61,13 @@ public class Ejecutable {
             if(packet.getObjeto()!=null){
                 //Con este libro trabajamos para mostrarlo en la interfaz
                 Libro recibido = (Libro)packet.getObjeto();
+                aux = true;
             }
+            
         }catch(Exception e){
             
         }
+        return aux;
         
     }
     
