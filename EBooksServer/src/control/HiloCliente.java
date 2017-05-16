@@ -4,11 +4,13 @@
  * and open the template in the editor.
  */
 package control;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import modelo.*;
+import common.*;
 
 /**
  *
@@ -35,7 +37,7 @@ public class HiloCliente extends Thread{
      */
     private static String CMD_NO = "CLOSE";
     
-    private static int CONSULTAR_LIBRO = 0;
+    private static String CONSULTAR_LIBRO = "CONSULTAR";
 
     
     //----------------------------------------------------------------------
@@ -98,9 +100,25 @@ public class HiloCliente extends Thread{
 
     @Override
     public void run() {
-        
-        
-    }
-    
-    
+        try{
+            while(true){
+                
+                //Recibe el paquete
+                Paquete packet = (Paquete)lector.readObject();
+                String comando = packet.getComando();
+                if(comando == CONSULTAR_LIBRO){
+                    Paquete p = (Paquete)lector.readObject();
+                    Libro lib = (Libro)p.getObjeto();
+                    Libro buscado = libreria.buscarLibroTitulo(lib.getTitulo());
+                    escritor.writeObject(buscado);
+                    escritor.flush();
+                    escritor.close();
+                    
+                }
+            }
+            
+        }catch(Exception e){
+            
+        }      
+    }    
 }

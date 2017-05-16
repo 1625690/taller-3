@@ -5,6 +5,7 @@
  */
 package vista;
 
+import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
@@ -17,6 +18,7 @@ import javax.swing.JComboBox;
 import javax.swing.JList;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
+import javax.swing.BorderFactory;
 
 /**
  *
@@ -221,26 +223,35 @@ public class Administrador extends javax.swing.JInternalFrame {
     private void BuscarCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarCategoriaActionPerformed
 
 	
-		// El JFrame con el JDesktopPane
-		JFrame v = new JFrame("LIBROS POR CATEGORIA");
+		// TODO add your handling code here:
+        // El JFrame con el JDesktopPane
+		JFrame ventana = new JFrame("LIBROS POR CATEGORIA");
+                //creamos el desktop panel
 		JDesktopPane dp = new JDesktopPane();
-		v.getContentPane().add(dp);
+                // lo metemos en lel frame
+		ventana.getContentPane().add(dp);
 		
-		// Se construye el panel que ira dentro del JInternalFrame
-		JPanel p = new JPanel();
-		p.setLayout(new FlowLayout());
-		p.add (new JLabel("LIBROS ENCONTRADOS"));
+	//panel parte superior de la ventana 
+		JPanel arriba = new JPanel(new FlowLayout());
+                //titulo de la subventana
+		arriba.add (new JLabel("LIBROS ENCONTRADOS"));
+        //panel parte media de la ventana
+                JPanel medio=new JPanel(new FlowLayout());
+                //aqui ira la lista de libros que nos pasen
 		JList lista=new JList();
                 DefaultListModel modelo = new DefaultListModel();
+                //ejemplo de como agregar un elemento a la lista (hay que hacerlo con los nombres de los libros
                 modelo.addElement("hola");
                 lista.setModel(modelo);
-                p.add(lista);
+                //agregamos nuestra lista al panel del medio
+                medio.add(lista);
                 
-                //boton para saber que eligio
-                
-                JButton elegir= new JButton();
-                //lo metemos al panel
-                p.add(elegir);
+         //creamos un panel inferior donde pondremos el boton de consultar libro       
+                JPanel inferior=new JPanel(new FlowLayout());
+                //creamos el boton
+                JButton elegir= new JButton("consultar");
+                //lo metemos al panel inferior
+                inferior.add(elegir);
                 
                 
                 
@@ -250,11 +261,16 @@ public class Administrador extends javax.swing.JInternalFrame {
 		// Se construye el JInternalFrame
 		JInternalFrame internal = new JInternalFrame("Un Internal Frame");
 		
-                internal.add(p);
+                //se meten los paneles dentro del internal frame
+                
+                internal.getContentPane().add(arriba,BorderLayout.NORTH);
+                internal.getContentPane().add(inferior,BorderLayout.SOUTH);
+                internal.getContentPane().add(medio,BorderLayout.CENTER);
+
 		
 		// Es importante darle tamaño -pack()- al JInternalFrame,
 		// porque si no, tendrá tamaño 0,0 y no lo veremos.
-		internal.pack();
+		internal.setSize(490, 470);
 		
 		// Por defecto el JInternalFrame no es redimensionable ni
 		// tiene el botón de cerrar, así que se lo ponemos.
@@ -265,9 +281,9 @@ public class Administrador extends javax.swing.JInternalFrame {
 		dp.add(internal);
 		
 		// Se visualiza todo.
-		v.setSize(500,500);
-		v.setVisible(true);
-		v.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		ventana.setSize(500,500);
+		ventana.setVisible(true);
+		ventana.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		
 		// Se visualiza el JInternalFrame 
 		internal.setVisible(true);
@@ -279,25 +295,33 @@ public class Administrador extends javax.swing.JInternalFrame {
     private void BuscarNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarNombreActionPerformed
         // TODO add your handling code here:
         // El JFrame con el JDesktopPane
-		JFrame v = new JFrame("LIBROS POR CATEGORIA");
+		JFrame ventana = new JFrame("LIBROS POR CATEGORIA");
+                //creamos el desktop panel
 		JDesktopPane dp = new JDesktopPane();
-		v.getContentPane().add(dp);
+                // lo metemos en lel frame
+		ventana.getContentPane().add(dp);
 		
-		// Se construye el panel que ira dentro del JInternalFrame
-		JPanel p = new JPanel();
-		p.setLayout(new FlowLayout());
-		p.add (new JLabel("LIBROS ENCONTRADOS"));
+	//panel parte superior de la ventana 
+		JPanel arriba = new JPanel(new FlowLayout());
+                //titulo de la subventana
+		arriba.add (new JLabel("LIBROS ENCONTRADOS"));
+        //panel parte media de la ventana
+                JPanel medio=new JPanel(new FlowLayout());
+                //aqui ira la lista de libros que nos pasen
 		JList lista=new JList();
                 DefaultListModel modelo = new DefaultListModel();
+                //ejemplo de como agregar un elemento a la lista (hay que hacerlo con los nombres de los libros
                 modelo.addElement("hola");
                 lista.setModel(modelo);
-                p.add(lista);
+                //agregamos nuestra lista al panel del medio
+                medio.add(lista);
                 
-                //boton para saber que eligio
-                
-                JButton elegir= new JButton();
-                //lo metemos al panel
-                p.add(elegir);
+         //creamos un panel inferior donde pondremos el boton de consultar libro       
+                JPanel inferior=new JPanel(new FlowLayout());
+                //creamos el boton
+                JButton elegir= new JButton("consultar");
+                //lo metemos al panel inferior
+                inferior.add(elegir);
                 
                 
                 
@@ -307,11 +331,16 @@ public class Administrador extends javax.swing.JInternalFrame {
 		// Se construye el JInternalFrame
 		JInternalFrame internal = new JInternalFrame("Un Internal Frame");
 		
-                internal.add(p);
+                //se meten los paneles dentro del internal frame
+                
+                internal.getContentPane().add(arriba,BorderLayout.NORTH);
+                internal.getContentPane().add(inferior,BorderLayout.SOUTH);
+                internal.getContentPane().add(medio,BorderLayout.CENTER);
+
 		
 		// Es importante darle tamaño -pack()- al JInternalFrame,
 		// porque si no, tendrá tamaño 0,0 y no lo veremos.
-		internal.pack();
+		internal.setSize(490, 470);
 		
 		// Por defecto el JInternalFrame no es redimensionable ni
 		// tiene el botón de cerrar, así que se lo ponemos.
@@ -322,9 +351,9 @@ public class Administrador extends javax.swing.JInternalFrame {
 		dp.add(internal);
 		
 		// Se visualiza todo.
-		v.setSize(500,500);
-		v.setVisible(true);
-		v.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		ventana.setSize(500,500);
+		ventana.setVisible(true);
+		ventana.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		
 		// Se visualiza el JInternalFrame 
 		internal.setVisible(true);
@@ -335,25 +364,33 @@ public class Administrador extends javax.swing.JInternalFrame {
     private void BuscarCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarCodigoActionPerformed
         // TODO add your handling code here:
         // El JFrame con el JDesktopPane
-		JFrame v = new JFrame("LIBROS POR CATEGORIA");
+		JFrame ventana = new JFrame("LIBROS POR CATEGORIA");
+                //creamos el desktop panel
 		JDesktopPane dp = new JDesktopPane();
-		v.getContentPane().add(dp);
+                // lo metemos en lel frame
+		ventana.getContentPane().add(dp);
 		
-		// Se construye el panel que ira dentro del JInternalFrame
-		JPanel p = new JPanel();
-		p.setLayout(new FlowLayout());
-		p.add (new JLabel("LIBROS ENCONTRADOS"));
+	//panel parte superior de la ventana 
+		JPanel arriba = new JPanel(new FlowLayout());
+                //titulo de la subventana
+		arriba.add (new JLabel("LIBROS ENCONTRADOS"));
+        //panel parte media de la ventana
+                JPanel medio=new JPanel(new FlowLayout());
+                //aqui ira la lista de libros que nos pasen
 		JList lista=new JList();
                 DefaultListModel modelo = new DefaultListModel();
+                //ejemplo de como agregar un elemento a la lista (hay que hacerlo con los nombres de los libros
                 modelo.addElement("hola");
                 lista.setModel(modelo);
-                p.add(lista);
+                //agregamos nuestra lista al panel del medio
+                medio.add(lista);
                 
-                //boton para saber que eligio
-                
-                JButton elegir= new JButton();
-                //lo metemos al panel
-                p.add(elegir);
+         //creamos un panel inferior donde pondremos el boton de consultar libro       
+                JPanel inferior=new JPanel(new FlowLayout());
+                //creamos el boton
+                JButton elegir= new JButton("consultar");
+                //lo metemos al panel inferior
+                inferior.add(elegir);
                 
                 
                 
@@ -363,11 +400,16 @@ public class Administrador extends javax.swing.JInternalFrame {
 		// Se construye el JInternalFrame
 		JInternalFrame internal = new JInternalFrame("Un Internal Frame");
 		
-                internal.add(p);
+                //se meten los paneles dentro del internal frame
+                
+                internal.getContentPane().add(arriba,BorderLayout.NORTH);
+                internal.getContentPane().add(inferior,BorderLayout.SOUTH);
+                internal.getContentPane().add(medio,BorderLayout.CENTER);
+
 		
 		// Es importante darle tamaño -pack()- al JInternalFrame,
 		// porque si no, tendrá tamaño 0,0 y no lo veremos.
-		internal.pack();
+		internal.setSize(490, 470);
 		
 		// Por defecto el JInternalFrame no es redimensionable ni
 		// tiene el botón de cerrar, así que se lo ponemos.
@@ -378,9 +420,9 @@ public class Administrador extends javax.swing.JInternalFrame {
 		dp.add(internal);
 		
 		// Se visualiza todo.
-		v.setSize(500,500);
-		v.setVisible(true);
-		v.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		ventana.setSize(500,500);
+		ventana.setVisible(true);
+		ventana.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		
 		// Se visualiza el JInternalFrame 
 		internal.setVisible(true);

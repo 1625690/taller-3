@@ -19,10 +19,7 @@ import modelo.*;
  *
  * @author invitado
  */
-public class Controladora {
-    
-    
-    
+public class Controladora {   
     
     public static void main(String[] args) {
         
@@ -53,13 +50,10 @@ public class Controladora {
         catch(Exception e){
             
         }
-        
-        libreria.modificarLibro("12232", 200, "El principito", "asdfdgdfdf", "Antoine de Saint-Exupery", 10000, 
-                "Infantil", true, "4-99");
-        
+ 
            try{            
-            ObjectOutputStream escritura = new ObjectOutputStream(new FileOutputStream("libros.txt", false));
-            escritura.writeObject(libreria.getLibros());  
+            ObjectOutputStream escritura = new ObjectOutputStream(new FileOutputStream("libreria.txt", false));
+            escritura.writeObject(libreria);  
             escritura.close();
         }
         catch(Exception e){

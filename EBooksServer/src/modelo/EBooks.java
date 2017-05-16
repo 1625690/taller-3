@@ -64,6 +64,24 @@ public class EBooks {
         return buscado;
     }
     
+        /**
+     * Busca un libro por Titulo y retorna el objeto
+     * @param titulo String con el titulo
+     * @return null si no lo encuentra
+     */
+    public Libro buscarLibroTitulo(String titulo){
+        Libro buscado = null;
+        
+        for (Iterator iterator = libros.values().iterator(); iterator.hasNext();) {
+            
+            buscado = (Libro)iterator.next();
+            if(buscado.getTitulo().equalsIgnoreCase(titulo)){
+                return buscado;
+            }
+        }        
+        return buscado;
+    }
+    
     /**
      * Agrega un libro al hashmap de libro
      * @param isbn
