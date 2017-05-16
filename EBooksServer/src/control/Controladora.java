@@ -24,34 +24,34 @@ public class Controladora {
     public static void main(String[] args) {
         
         EBooks libreria = new EBooks();
-        
+        //LECTURA DE LA PERSISTENCIA
         try{
-            
-            ServerSocket server = new ServerSocket(4000);
-            
-            
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-        
-        try{
-            File archivo = new File("libros.txt");
+            File archivo = new File("liberia.txt");
             if(archivo.exists()){
                 ObjectInputStream lectura = new ObjectInputStream(new FileInputStream(archivo));
-                libreria.setLibros((HashMap)lectura.readObject());
-                Iterator i = libreria.getLibros().values().iterator();
-                while(i.hasNext()){
-                    Libro l = (Libro)i.next();
-                    System.out.println(l.getISBN() + " - " + l.getTitulo() + " - " + l.getAutor());
-                }
+                libreria = (EBooks)lectura.readObject();
                 lectura.close();
             }
         }
         catch(Exception e){
             
         }
- 
-           try{            
+        
+        //APERTURA DEL SERVIDOR
+        try{
+            //Crea el Hilo del servidor que escucha las conexiones
+            HiloServer server = new HiloServer();
+            server.start();
+            
+            
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        
+
+        
+        //ESCRITURA DE LA PERSISTENCIA
+        try{            
             ObjectOutputStream escritura = new ObjectOutputStream(new FileOutputStream("libreria.txt", false));
             escritura.writeObject(libreria);  
             escritura.close();

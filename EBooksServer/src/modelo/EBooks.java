@@ -149,7 +149,25 @@ public class EBooks {
         lib.setNumPag(numPag);
         lib.setPrecio(precio);        
    
-    } 
+    }
+    
+    /**
+     * Metodo que da una lista de los libros por categoria
+     * @param categoria categoria de los libros
+     * @return un hashMap con los libros de esa categoria
+     */
+    public HashMap darLibrosPorCategoria(String categoria){
+        HashMap lista = new HashMap();
+        Libro buscado = null;
+        for (Iterator iterator = libros.values().iterator(); iterator.hasNext();) {
+            
+            buscado = (Libro)iterator.next();
+            if(buscado.getCategoria().equals(categoria)){
+                lista.put(buscado.getISBN(), buscado);
+            }
+        }          
+        return lista;
+    }
     
     //----------------------------------------------------------------------
     // GETS Y SETTERS

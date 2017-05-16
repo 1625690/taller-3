@@ -11,6 +11,7 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import modelo.*;
 import common.*;
+import java.util.HashMap;
 
 /**
  *
@@ -22,22 +23,11 @@ public class HiloCliente extends Thread{
     // COMANDOS
     //----------------------------------------------------------------------
     
-    /**
-     * Comand de recibido
-     */
-    private static String CMD_OK = "OK";
-    
-    /**
-     * Comando de error
-     */
-    private static String CMD_ER = "ER";
-    
-    /**
-     * Comando para cerrar
-     */
-    private static String CMD_NO = "CLOSE";
-    
     private static String CONSULTAR_LIBRO = "CONSULTAR";
+    
+    private static String CONSULTAR_POR_CATEGORIA = "CONSULTAR_CATEGORIAS";
+    
+    private static String CERRAR = "CLOSE";
 
     
     //----------------------------------------------------------------------
@@ -101,20 +91,31 @@ public class HiloCliente extends Thread{
     @Override
     public void run() {
         try{
-            while(true){
+            boolean terminar = true;
+            while(terminar){
                 
                 //Recibe el paquete
                 Paquete packet = (Paquete)lector.readObject();
                 String comando = packet.getComando();
-                if(comando == CONSULTAR_LIBRO){
+                if(comando.equals(CONSULTAR_LIBRO)){
                     Paquete p = (Paquete)lector.readObject();
                     Libro lib = (Libro)p.getObjeto();
                     Libro buscado = libreria.buscarLibroTitulo(lib.getTitulo());
                     escritor.writeObject(buscado);
                     escritor.flush();
-                    escritor.close();
-                    
+                                 
                 }
+                else if(comando.equals(CONSULTAR_POR_CATEGORIA)){
+                    Paquete p = (Paquete)lector.readObject();
+                    String categoria = (String)p.getObjeto();
+                    HashMap lista = libreria.darLibrosPorCategoria(categoria);
+                    escritor.writeObject(lista);
+                    escritor.flush();
+                      
+                }else if(comando.equals(CERRAR)){
+                    escritor.close();
+                    terminar = false;                    
+                }               
             }
             
         }catch(Exception e){

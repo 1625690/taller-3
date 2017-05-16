@@ -7,6 +7,8 @@ package control;
 
 import java.io.IOException;
 import java.net.ServerSocket;
+import java.net.Socket;
+import modelo.*;
 
 /**
  *
@@ -14,16 +16,30 @@ import java.net.ServerSocket;
  */
 public class HiloServer extends Thread{
     
-    private ServerSocket server;
-
+    private ServerSocket server;      
+    private static HiloCliente hiloCliente;
+    private EBooks libreria;
+    private Socket cliente;
+    
     public HiloServer() {
         try{
             server = new ServerSocket(4200);
+            libreria = new EBooks();
         }
         catch(IOException Exception){
             
-        }
-        
+        }       
     }
- 
+    
+    public void run(){
+        try{
+            while(true){
+                cliente = server.accept();   
+                hiloCliente = new HiloCliente(libreria, cliente);
+                hiloCliente.start();
+            }
+        }catch(Exception e){
+                
+        }        
+    }
 }
