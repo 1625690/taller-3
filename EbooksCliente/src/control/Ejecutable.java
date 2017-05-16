@@ -12,6 +12,7 @@ import java.io.ObjectOutputStream;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.HashMap;
 import modelo.*;
 
 /**
@@ -62,6 +63,24 @@ public class Ejecutable {
             
         }
         
+    }
+    
+    //JHON ESTE ES EL SEGUNDO METODO DE CONSULTA
+    public static void consultarLibrosCategoria(String categoria){
+        //Crea el paquete, se manda el comando y se manda la categoria en un String
+        Paquete packet = new Paquete(CONSULTAR_POR_CATEGORIA, categoria);
+        try{
+            //Manda un paquete con el comando consultar por categoria
+            escritor.writeObject(packet);
+            escritor.flush();
+            //Recibe el paquete de respuesta
+            packet = (Paquete)lector.readObject();
+            //Recibe una lista(HashMap) que puede que este vacia
+            //Con esta lista ya podemos trabajar en la interfaz que se supone que esta conectada con este controlador
+            HashMap librosPorCategoria = (HashMap)lector.readObject();
+        }catch(Exception e){
+            
+        }
     }
     
     public static void main(String args[])throws UnknownHostException, IOException{

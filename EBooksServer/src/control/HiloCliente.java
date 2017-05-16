@@ -108,8 +108,9 @@ public class HiloCliente extends Thread{
                                  
                 }
                 else if(comando.equals(CONSULTAR_POR_CATEGORIA)){
-                    Paquete p = (Paquete)lector.readObject();
-                    String categoria = (String)p.getObjeto();
+                    //Se recibe la categoria del paquete
+                    String categoria = (String)packet.getObjeto();
+                    //Crea una variable de tipo hashMap con una lista, puede estar vacía
                     HashMap lista = libreria.darLibrosPorCategoria(categoria);
                     escritor.writeObject(lista);
                     escritor.flush();
