@@ -5,13 +5,14 @@
  */
 package modelo;
 
+import java.io.Serializable;
 import java.util.*;
 
 /**
  *
  * @author invitado
  */
-public class EBooks {
+public class EBooks implements Serializable{
 
      
     //----------------------------------------------------------------------

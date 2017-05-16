@@ -21,10 +21,10 @@ public class HiloServer extends Thread{
     private EBooks libreria;
     private Socket cliente;
     
-    public HiloServer() {
+    public HiloServer(EBooks libreria) {
         try{
             server = new ServerSocket(4200);
-            libreria = new EBooks();
+            this.libreria = libreria;
         }
         catch(IOException Exception){
             

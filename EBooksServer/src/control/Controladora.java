@@ -40,7 +40,7 @@ public class Controladora {
         //APERTURA DEL SERVIDOR
         try{
             //Crea el Hilo del servidor que escucha las conexiones
-            HiloServer server = new HiloServer();
+            HiloServer server = new HiloServer(libreria);
             server.start();
             
             
