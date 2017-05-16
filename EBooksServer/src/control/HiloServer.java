@@ -13,6 +13,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Iterator;
 import modelo.*;
 
 /**
@@ -26,17 +27,24 @@ public class HiloServer extends Thread{
     private EBooks libreria;
     private Socket cliente;
     
-    public HiloServer(EBooks libreria) {
+    public HiloServer() {
         try{
             //CARGA LOS DATOS DEL SERVER
-            File archivo = new File("liberia.txt");
+            File archivo = new File("libreria.txt");
             if(archivo.exists()){
                 ObjectInputStream lectura = new ObjectInputStream(new FileInputStream(archivo));
                 libreria = (EBooks)lectura.readObject();
                 lectura.close();
-            }
+            }            
+            for (Iterator iterator = libreria.getLibros().values().iterator(); iterator.hasNext();) {
             
-            this.libreria = libreria;
+                Libro buscado = (Libro)iterator.next();
+                System.out.println(buscado.getTitulo() + " - " + buscado.getCategoria());
+            } 
+//            libreria.agregarLibro("25223", 52, "Brujeria", "asdasd", "Miguel Angel", 20000, "Fantasia", false, "18-99");
+//            ObjectOutputStream escritura = new ObjectOutputStream(new FileOutputStream("libreria.txt", false));
+//            escritura.writeObject(libreria);  
+//            escritura.close();  
         }
         catch(IOException e){
             
