@@ -63,6 +63,16 @@ public class Libro implements Serializable {
      */
     private String ISBN;
     
+    /**
+     * Marca si el libro esta en oferta
+     */
+    private boolean enOferta;
+    
+    /**
+     * Periodo de oferta del libro
+     */
+    private PeriodoOferta oferta;
+    
     //----------------------------------------------------------------------
     // CONSTRUCTOR
     //----------------------------------------------------------------------
@@ -88,6 +98,8 @@ public class Libro implements Serializable {
         this.esBestSeller = esBestSeller;
         this.rangoEdad = rangoEdad;
         this.ISBN = isbn;
+        this.enOferta = false;
+        this.oferta = null;
     }
     
     //----------------------------------------------------------------------
@@ -127,6 +139,11 @@ public class Libro implements Serializable {
     }
 
     public double getPrecio() {
+        if(oferta == null){
+            return precio;
+        }else{
+            this.precio = precio - (precio*(oferta.getPorcentajeDescuento()/100));
+        }
         return precio;
     }
 
@@ -165,6 +182,22 @@ public class Libro implements Serializable {
     public void setISBN(String ISBN) {
         this.ISBN = ISBN;
     }
+
+    public boolean isEnOferta() {
+        return enOferta;
+    }
+
+    public void setEnOferta(boolean enOferta) {
+        this.enOferta = enOferta;
+    }   
+
+    public PeriodoOferta getOferta() {
+        return oferta;
+    }
+
+    public void setOferta(PeriodoOferta oferta) {
+        this.oferta = oferta;
+    }    
     
     
     /**

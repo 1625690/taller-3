@@ -13,15 +13,48 @@ import java.io.Serializable;
  */
 public class Usuario implements Serializable {
     
-    private String nick;
+    private String nombre;
+        
+    private String numeroCelular;
     
+    private String email;
+      
     private String password;
     
-    public Usuario(String nick, String password){
+    private String nick;
+    
+    public Usuario(String nick, String password, String nombre, String numeroCelular, String email){
+        this.nombre = nombre;
+        this.numeroCelular = numeroCelular;
+        this.email = email;
         this.nick = nick;
         this.password = password;
         
     }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getNumeroCelular() {
+        return numeroCelular;
+    }
+
+    public void setNumeroCelular(String numeroCelular) {
+        this.numeroCelular = numeroCelular;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }   
 
     public String getNick() {
         return nick;

@@ -19,12 +19,14 @@ public class EBooks implements Serializable{
     // ATRIBUTOS
     //----------------------------------------------------------------------
     
-    private HashSet usuarios;
+    private HashMap usuarios;
     
     /**
      * Hashmap de libros
      */
     private HashMap libros;
+    
+    private HashMap ofertas;
     
     //----------------------------------------------------------------------
     // CONSTRUCTOR
@@ -34,17 +36,13 @@ public class EBooks implements Serializable{
      * 
      */
     public EBooks(){
-        usuarios = new HashSet();
+        usuarios = new HashMap();
         libros = new HashMap();
-        
-        //Inicia el usuario administrador
-        usuarios.add(new Usuario("admin", "admin"));
-        agregarLibro("00001", 500, "EL amor en los tiempos del cólera", "Asdfggjhkl", "Gabriel Garcia"
-                + "Marquez", 15000, "Realismo magico", false, "11-99");
+        ofertas = new HashMap();
     }
     
     //----------------------------------------------------------------------
-    // METODOS
+    // METODOS ADMINISTRADOR
     //----------------------------------------------------------------------
     
     /**
@@ -126,6 +124,19 @@ public class EBooks implements Serializable{
     public boolean existeLibro(String isbn){        
         return libros.containsKey(isbn);
     }
+
+    /**
+     * Crea un periodo de oferta
+     * @return 
+     */
+    public boolean crearPeriodoOferta(String nombre, Calendar fechaInicio, Calendar fechaFin, int porcentajeDescueto){
+        boolean creado = false;
+        PeriodoOferta periodo = new PeriodoOferta(nombre, fechaInicio, fechaFin, porcentajeDescueto);
+        if(libros.put(nombre, periodo) == null){
+            creado = true;
+        }
+        return creado;
+    }
     
     /**
      * Modifica un libro dado los parámetros
@@ -153,6 +164,27 @@ public class EBooks implements Serializable{
     }
     
     /**
+     * Coloca un libro en oferta si existe
+     * @param isbn
+     * @param nombreOferta
+     * @return 
+     */
+    public boolean colocarLibroEnOferta(String isbn, String nombreOferta){
+        boolean colocado = false;
+        Libro l = buscarLibroISBN(isbn);
+        
+        PeriodoOferta periodo = (PeriodoOferta)ofertas.get(nombreOferta);
+        if(l != null && periodo != null){
+            l.setEnOferta(true);
+            l.setOferta(periodo);
+            libros.put(isbn, l);
+            colocado = true;
+        }
+        
+        return colocado;
+    }
+    
+    /**
      * Metodo que da una lista de los libros por categoria
      * @param categoria categoria de los libros
      * @return un hashMap con los libros de esa categoria
@@ -174,11 +206,11 @@ public class EBooks implements Serializable{
     // GETS Y SETTERS
     //----------------------------------------------------------------------
     
-    public HashSet getUsuarios() {
+    public HashMap getUsuarios() {
         return usuarios;
     }
 
-    public void setUsuarios(HashSet usuarios) {
+    public void setUsuarios(HashMap usuarios) {
         this.usuarios = usuarios;
     }
 
@@ -189,5 +221,13 @@ public class EBooks implements Serializable{
     public void setLibros(HashMap libros) {
         this.libros = libros;
     }
+
+    public HashMap getOfertas() {
+        return ofertas;
+    }
+
+    public void setOfertas(HashMap ofertas) {
+        this.ofertas = ofertas;
+    }   
    
 }

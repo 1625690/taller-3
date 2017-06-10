@@ -2,16 +2,16 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/Familia/Desktop/interfazm/src/vista/Administrador.java</file>
-            <file>file:/C:/Users/Familia/Desktop/interfazm/src/vista/Cliente.java</file>
-            <file>file:/C:/Users/Familia/Desktop/interfazm/src/vista/Libros.java</file>
-        </group>
         <group name="Group 20170516-12:38:18">
             <file>file:/C:/Users/JhonCarlos/Documents/Mixed%20Content/Academia/Univalle/IngSis/Semestre%203/PI/Projectos/Taller%203/taller-3/EbooksCliente/src/vista/Cliente.java</file>
             <file>file:/C:/Users/JhonCarlos/Documents/Mixed%20Content/Academia/Univalle/IngSis/Semestre%203/PI/Projectos/Taller%203/taller-3/EbooksCliente/src/modelo/Libro.java</file>
             <file>file:/C:/Users/JhonCarlos/Documents/Mixed%20Content/Academia/Univalle/IngSis/Semestre%203/PI/Projectos/Taller%203/taller-3/EbooksCliente/src/vista/ConsultaLibrosNombre.java</file>
             <file>file:/C:/Users/JhonCarlos/Documents/Mixed%20Content/Academia/Univalle/IngSis/Semestre%203/PI/Projectos/Taller%203/taller-3/EbooksCliente/src/control/Ejecutable.java</file>
+        </group>
+        <group>
+            <file>file:/C:/Users/CristianSteven/Documents/GitHub/taller-3/EbooksCliente/src/control/Ejecutable.java</file>
+            <file>file:/C:/Users/CristianSteven/Documents/GitHub/taller-3/EbooksCliente/src/vista/Cliente.java</file>
+            <file>file:/C:/Users/CristianSteven/Documents/GitHub/taller-3/EbooksCliente/src/vista/ConsultaLibrosNombre.java</file>
         </group>
     </open-files>
 </project-private>
