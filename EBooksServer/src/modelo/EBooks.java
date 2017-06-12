@@ -5,6 +5,11 @@
  */
 package modelo;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileReader;
+import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.util.*;
 
@@ -19,6 +24,9 @@ public class EBooks implements Serializable{
     // ATRIBUTOS
     //----------------------------------------------------------------------
     
+    /**
+     * Hashmap de usuarios
+     */
     private HashMap usuarios;
     
     /**
@@ -26,6 +34,9 @@ public class EBooks implements Serializable{
      */
     private HashMap libros;
     
+    /**
+    * 
+    */
     private HashMap ofertas;
     
     //----------------------------------------------------------------------
@@ -42,7 +53,7 @@ public class EBooks implements Serializable{
     }
     
     //----------------------------------------------------------------------
-    // METODOS ADMINISTRADOR
+    // MANEJO DE LIBROS
     //----------------------------------------------------------------------
     
     /**
@@ -85,6 +96,7 @@ public class EBooks implements Serializable{
      * Agrega un libro al hashmap de libro
      * @param isbn
      * @param numPag
+     * @param ruta
      * @param titulo
      * @param resumen
      * @param autor
@@ -94,13 +106,14 @@ public class EBooks implements Serializable{
      * @param rangoEdad
      * @return - True si el libro pudo ser agregado
      */
-    public boolean agregarLibro(String isbn, int numPag, String titulo, String resumen, String autor, double precio, String categoria, boolean esBestSeller, String rangoEdad){
-        boolean agregado = false;
-        Libro l = new Libro(isbn, numPag, titulo, resumen, autor, precio, categoria, esBestSeller, rangoEdad);
-        if(libros.put(isbn, l) == null){
-            agregado = true;
+    public boolean agregarLibro(String isbn, String ruta, int numPag, String titulo, String resumen, String autor, double precio, String categoria, boolean esBestSeller, String rangoEdad){
+        
+        Libro l = new Libro(isbn, numPag, ruta, titulo, resumen, autor, precio, categoria, esBestSeller, rangoEdad);
+        if(libros.containsKey(isbn) == false){
+            libros.put(isbn, l);
+            return false;
         }
-        return agregado;
+        return true;
     }
     
     /**
@@ -127,6 +140,10 @@ public class EBooks implements Serializable{
 
     /**
      * Crea un periodo de oferta
+     * @param nombre
+     * @param fechaInicio
+     * @param fechaFin
+     * @param porcentajeDescueto
      * @return 
      */
     public boolean crearPeriodoOferta(String nombre, Calendar fechaInicio, Calendar fechaFin, int porcentajeDescueto){
@@ -136,6 +153,33 @@ public class EBooks implements Serializable{
             creado = true;
         }
         return creado;
+    }
+    
+    /**
+     * Retorna un string con el libro indicado a leer segun una ruta
+     * @param ruta
+     * @return un string con el contenido del libro, null en caso contrario
+     */
+    public String leerLibro(String ruta){
+        String libro = null;        
+        try {           
+            File archivo = new File(ruta);
+            BufferedReader lectura = new BufferedReader(new FileReader(archivo));
+            if(archivo.exists()){
+                //Construye el libro
+                StringBuilder lib = new StringBuilder();
+                String linea = lectura.readLine();
+                while(lectura != null){
+                    lib.append(linea);
+                    linea = lectura.readLine();
+                }
+                lectura.close();
+                libro = lib.toString();
+            }            
+           
+        } catch (Exception e) {
+        }
+        return libro;
     }
     
     /**
@@ -190,15 +234,114 @@ public class EBooks implements Serializable{
      * @return un hashMap con los libros de esa categoria
      */
     public HashMap darLibrosPorCategoria(String categoria){
-        HashMap lista = new HashMap();
-        Libro buscado = null;
+        HashMap lista = new HashMap();        
         for (Iterator iterator = libros.values().iterator(); iterator.hasNext();) {
             
-            buscado = (Libro)iterator.next();
+            Libro buscado = (Libro)iterator.next();
             if(buscado.getCategoria().equals(categoria)){
                 lista.put(buscado.getISBN(), buscado);
             }
         }          
+        return lista;
+    }
+    
+    /**
+     * Retorna un hashmap con los libros que son best seller
+     * @return 
+     */
+    public HashMap darLibrosBestSeller(){
+        HashMap lista = new HashMap();        
+        for (Iterator iterator = libros.values().iterator(); iterator.hasNext();) {            
+            Libro buscado = (Libro)iterator.next();
+            if(buscado.isEsBestSeller() == true){
+                lista.put(buscado.getISBN(), buscado);
+            }
+        }          
+        return lista;
+    }
+    
+    /**
+     * Retorna un hashmap con los libros que estan en oferta
+     * @return 
+     */
+    public HashMap darLibrosEnOferta(){
+        HashMap lista = new HashMap();        
+        for (Iterator iterator = libros.values().iterator(); iterator.hasNext();) {            
+            Libro buscado = (Libro)iterator.next();
+            if(buscado.isEnOferta() == true){
+                lista.put(buscado.getISBN(), buscado);
+            }
+        }          
+        return lista;
+    }
+    
+    //----------------------------------------------------------------------
+    // MANEJO USUARIOS
+    //----------------------------------------------------------------------
+    
+    /**
+     * 
+     * @param nick
+     * @param password
+     * @param nombre
+     * @param numeroCelular
+     * @param email
+     * @param cargo
+     * @param autorizado
+     * @return 
+     */
+    public boolean agregarUsuarioAdministrador(String nick, String password, String nombre, String numeroCelular, String email, String cargo, boolean autorizado){
+        UsuarioAdministrador u = new UsuarioAdministrador(nick, password, nombre, numeroCelular, email, cargo, autorizado);
+        if(usuarios.containsKey(nick) == false){
+           usuarios.put(nick, u);
+           return true;
+        }
+        return false;
+    }
+    
+    /**
+     * 
+     * @param nick
+     * @param password
+     * @param nombre
+     * @param numeroCelular
+     * @param email
+     * @param fechaCumple
+     * @param saldo
+     * @return 
+     */
+    public boolean agregarUsuarioLibreria(String nick, String password, String nombre, String numeroCelular, String email, Calendar fechaCumple, double saldo){
+        UsuarioLibreria u = new UsuarioLibreria(nick, password, nombre, numeroCelular, email, fechaCumple, saldo);
+        if(usuarios.containsKey(nick) == false){
+           usuarios.put(nick, u);
+           return true;
+        }
+        return false;
+    }
+    
+    public UsuarioAdministrador buscarUsuarioPorNick(String nick){
+        UsuarioAdministrador buscado = null;        
+        for (Iterator iterator = usuarios.values().iterator(); iterator.hasNext();){
+            
+            buscado = (UsuarioAdministrador)iterator.next();
+            if(buscado.getNick().equalsIgnoreCase(nick)){
+                return buscado;
+            }
+        }        
+        return buscado;
+    }
+    
+    public void recargarSaldo(String nick, double saldo){
+        UsuarioLibreria u = (UsuarioLibreria)usuarios.get(nick);
+        u.agregarRecarga(saldo);        
+    }
+    
+    public ArrayList librosMejorCalificados(){
+        ArrayList lista = new ArrayList();
+        for (Iterator iterator = libros.values().iterator(); iterator.hasNext();) {
+            
+            
+        }
         return lista;
     }
     

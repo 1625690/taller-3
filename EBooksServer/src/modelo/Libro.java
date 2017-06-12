@@ -73,6 +73,15 @@ public class Libro implements Serializable {
      */
     private PeriodoOferta oferta;
     
+    /**
+     * Ruta del libro en txt
+     */
+    private String ruta;
+    
+    /**
+     * Calificacion
+     */
+    private int calificacion;
     //----------------------------------------------------------------------
     // CONSTRUCTOR
     //----------------------------------------------------------------------
@@ -88,7 +97,8 @@ public class Libro implements Serializable {
      * @param esBestSeller
      * @param rangoEdad 
      */
-    public Libro(String isbn, int numPag, String titulo, String resumen, String autor, double precio, String categoria, boolean esBestSeller, String rangoEdad) {
+    public Libro(String isbn, int numPag, String ruta, String titulo, String resumen, String autor, double precio, String categoria, boolean esBestSeller, String rangoEdad) {
+        this.ruta = ruta;
         this.numPag = numPag;
         this.titulo = titulo;
         this.resumen = resumen;
@@ -100,6 +110,7 @@ public class Libro implements Serializable {
         this.ISBN = isbn;
         this.enOferta = false;
         this.oferta = null;
+        calificacion = 0;
     }
     
     //----------------------------------------------------------------------
@@ -198,6 +209,23 @@ public class Libro implements Serializable {
     public void setOferta(PeriodoOferta oferta) {
         this.oferta = oferta;
     }    
+
+    public String getRuta() {
+        return ruta;
+    }
+
+    public void setRuta(String ruta) {
+        this.ruta = ruta;
+    }   
+
+    public int getCalificacion() {
+        return calificacion;
+    }
+
+    public void setCalificacion(int calificacion) {
+        this.calificacion = calificacion;
+    }
+    
     
     
     /**

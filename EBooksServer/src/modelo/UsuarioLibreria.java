@@ -26,7 +26,13 @@ public class UsuarioLibreria extends Usuario{
         super(nick, password, nombre, numeroCelular, email);
         this.fechaCumple = fechaCumple;
         this.saldo = saldo;
+        recargas = new ArrayList<Recarga>();
         
+    }
+    
+    public void agregarRecarga(double valor){
+        recargas.add(new Recarga(valor));
+        this.saldo += valor;
     }
 
     public Calendar getFechaCumple() {
@@ -53,5 +59,11 @@ public class UsuarioLibreria extends Usuario{
         this.edad = edad;
     }
 
-    
+    public ArrayList<Recarga> getRecargas() {
+        return recargas;
+    }
+
+    public void setRecargas(ArrayList<Recarga> recargas) {
+        this.recargas = recargas;
+    }    
 }
