@@ -35,17 +35,14 @@ public class HiloServer extends Thread{
                 ObjectInputStream lectura = new ObjectInputStream(new FileInputStream(archivo));
                 libreria = (EBooks)lectura.readObject();
                 lectura.close();
-            }            
-            for (Iterator iterator = libreria.getLibros().values().iterator(); iterator.hasNext();) {
+                System.out.println(libreria.buscarUsuarioPorNick("admin").getNick() + " - " + libreria.buscarUsuarioPorNick("admin").getPassword());
+                
+            }else{
+                libreria = new EBooks();
+            }
             
-                Libro buscado = (Libro)iterator.next();
-                System.out.println(buscado.getISBN() + " - " + buscado.getTitulo() + " - " + buscado.getCategoria());
-            } 
-            //libreria.modificarLibro("00001", 200, "El amor en los tiempos del colera", "asdasd", "Gabriel garcia", 15500, "Colombia", true, "25");
-            //libreria.agregarLibro("25223", 52, "Brujeria", "asdasd", "Miguel Angel", 20000, "Fantasia", false, "18-99");
-//            ObjectOutputStream escritura = new ObjectOutputStream(new FileOutputStream("libreria.txt", false));
-//            escritura.writeObject(libreria);  
-//            escritura.close();  
+            
+             
         }
         catch(IOException e){
             

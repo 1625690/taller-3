@@ -23,7 +23,7 @@ public class Controladora {
     
     public static void main(String[] args) {                 
        
-        try{               
+        try{    
 
             //Crea el Hilo del servidor que escucha las conexiones
             HiloServer server = new HiloServer();
