@@ -28,6 +28,10 @@ public class HiloCliente extends Thread{
     private static String CONSULTAR_POR_CATEGORIA = "CONSULTAR_CATEGORIAS";
     
     private static String CERRAR = "CLOSE";
+    
+    private static String CONECTAR_USUARIO = "CONECTAR_USUARIO";
+    
+    private static String AGREGAR_LIBRO = "AGREGAR_LIBRO";
 
     
     //----------------------------------------------------------------------
@@ -118,7 +122,22 @@ public class HiloCliente extends Thread{
                 }else if(comando.equals(CERRAR)){
                     escritor.close();
                     terminar = true;                    
-                }               
+                }else if(comando.equals(CONECTAR_USUARIO)){
+                    String[] login = (String[])packet.getObjeto();
+                    String nick = login[0];
+                    String password = login[1];
+                }
+                else if(comando.equals(AGREGAR_LIBRO)){
+                    //RECIBE UN LIBRO DEL PAQUETE
+                    Libro libro = (Libro)packet.getObjeto();
+                    //ENVIA TRUE SI EL LIBRO SE AGREGA, FALSE EN CASO CONTRARIO
+                    escritor.writeObject(libreria.agregarLibro(libro));
+                    escritor.flush();
+                }
+                else if(comando.equals()){
+                    
+                }
+                
             }
             
         }catch(Exception e){

@@ -19,9 +19,9 @@ import modelo.*;
  * Clase que inicializa el cliente de la aplicacion EBooks
  * @author CristianSteven
  */
-public class Ejecutable {
+public class Controladora {
     
-        //----------------------------------------------------------------------
+    //----------------------------------------------------------------------
     // COMANDOS
     //----------------------------------------------------------------------
     
@@ -30,6 +30,15 @@ public class Ejecutable {
     private static String CONSULTAR_POR_CATEGORIA = "CONSULTAR_CATEGORIAS";
     
     private static String CERRAR = "CLOSE";
+    
+    private static String CONECTAR_USUARIO = "CONECTAR_USUARIO";
+    
+    private static String AGREGAR_LIBRO = "AGREGAR_LIBRO";
+
+    
+    //----------------------------------------------------------------------
+    // ATRIBUTOS
+    //----------------------------------------------------------------------
     
     private static Socket socket;
     

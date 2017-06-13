@@ -94,23 +94,12 @@ public class EBooks implements Serializable{
     
     /**
      * Agrega un libro al hashmap de libro
-     * @param isbn
-     * @param numPag
-     * @param ruta
-     * @param titulo
-     * @param resumen
-     * @param autor
-     * @param precio
-     * @param categoria
-     * @param esBestSeller
-     * @param rangoEdad
+     * 
      * @return - True si el libro pudo ser agregado
      */
-    public boolean agregarLibro(String isbn, String ruta, int numPag, String titulo, String resumen, String autor, double precio, String categoria, boolean esBestSeller, String rangoEdad){
-        
-        Libro l = new Libro(isbn, numPag, ruta, titulo, resumen, autor, precio, categoria, esBestSeller, rangoEdad);
-        if(libros.containsKey(isbn) == false){
-            libros.put(isbn, l);
+    public boolean agregarLibro(Libro libro){
+        if(libros.containsKey(libro.getISBN()) == false){
+            libros.put(libro.getISBN(), libro);
             return false;
         }
         return true;
