@@ -372,5 +372,153 @@ public class EBooks implements Serializable{
     public void setOfertas(HashMap ofertas) {
         this.ofertas = ofertas;
     }   
+    
+    public String topTenBuenos(HashMap libros){
+       ArrayList lista = new ArrayList();
+
+        int cantidad=0;
+    
+         for (Iterator iterator = libros.values().iterator(); iterator.hasNext();) {            
+            Libro buscado = (Libro)iterator.next();
+            if((cantidad<10)&&(buscado.getCalificacion() == 5)){
+                cantidad=cantidad+1;
+               lista.add(buscado.getTitulo());
+            }
+            
+               
+            }
+         for (Iterator iterator = libros.values().iterator(); iterator.hasNext();) {            
+            Libro buscado = (Libro)iterator.next();
+            if((cantidad<10)&&(buscado.getCalificacion() == 4)){
+                cantidad=cantidad+1;
+               lista.add(buscado.getTitulo());
+               
+            }
+               
+            }
+         for (Iterator iterator = libros.values().iterator(); iterator.hasNext();) {            
+            Libro buscado = (Libro)iterator.next();
+            if((cantidad<10)&&(buscado.getCalificacion() == 3)){
+                cantidad=cantidad+1;
+                lista.add(buscado.getTitulo());
+               
+            }
+               
+            }
+         for (Iterator iterator = libros.values().iterator(); iterator.hasNext();) {            
+            Libro buscado = (Libro)iterator.next();
+            if((cantidad<10)&&(buscado.getCalificacion() == 2)){
+                cantidad=cantidad+1;
+                lista.add(buscado.getTitulo());
+               
+            }
+               
+            }
+         for (Iterator iterator = libros.values().iterator(); iterator.hasNext();) {            
+            Libro buscado = (Libro)iterator.next();
+            if((cantidad<10)&&(buscado.getCalificacion() == 1)){
+                cantidad=cantidad+1;
+                lista.add(buscado.getTitulo());
+               
+            }
+            
+               
+            }
+         for (Iterator iterator = libros.values().iterator(); iterator.hasNext();) {            
+            Libro buscado = (Libro)iterator.next();
+            if((cantidad<10)&&(buscado.getCalificacion() == 0)){
+                cantidad=cantidad+1;
+               lista.add(buscado.getTitulo());
+            }
+         }
+         
+         String top=null;
+         
+         for(int i=0;i<cantidad;i++){
+        top=top+"/n"+(String) lista.get(i);
+         
+         }
+           return top;    
+           
+         
+    }
+    
+   
+
+
+   public String topTenMalos(HashMap libros){
+       ArrayList lista = new ArrayList();
+
+        int cantidad=0;
+    
+        
+         for (Iterator iterator = libros.values().iterator(); iterator.hasNext();) {            
+            Libro buscado = (Libro)iterator.next();
+            if((cantidad<10)&&(buscado.getCalificacion() == 1)){
+                cantidad=cantidad+1;
+               lista.add(buscado.getTitulo());
+               
+            }
+               
+            }
+         for (Iterator iterator = libros.values().iterator(); iterator.hasNext();) {            
+            Libro buscado = (Libro)iterator.next();
+            if((cantidad<10)&&(buscado.getCalificacion() == 2)){
+                cantidad=cantidad+1;
+                lista.add(buscado.getTitulo());
+               
+            }
+               
+            }
+         for (Iterator iterator = libros.values().iterator(); iterator.hasNext();) {            
+            Libro buscado = (Libro)iterator.next();
+            if((cantidad<10)&&(buscado.getCalificacion() == 3)){
+                cantidad=cantidad+1;
+                lista.add(buscado.getTitulo());
+               
+            }
+               
+            }
+         for (Iterator iterator = libros.values().iterator(); iterator.hasNext();) {            
+            Libro buscado = (Libro)iterator.next();
+            if((cantidad<10)&&(buscado.getCalificacion() == 4)){
+                cantidad=cantidad+1;
+                lista.add(buscado.getTitulo());
+               
+            }
+            
+               
+            }
+         for (Iterator iterator = libros.values().iterator(); iterator.hasNext();) {            
+            Libro buscado = (Libro)iterator.next();
+            if((cantidad<10)&&(buscado.getCalificacion() == 5)){
+                cantidad=cantidad+1;
+               lista.add(buscado.getTitulo());
+            }
+         }
+         
+          for (Iterator iterator = libros.values().iterator(); iterator.hasNext();) {            
+            Libro buscado = (Libro)iterator.next();
+            if((cantidad<10)&&(buscado.getCalificacion() == 0)){
+                cantidad=cantidad+1;
+               lista.add(buscado.getTitulo());
+            }
+            
+               
+            }
+         
+         String top=null;
+         
+         for(int i=0;i<cantidad;i++){
+        top=top+"/n"+(String) lista.get(i);
+         
+         }
+           return top;    
+           
+         
+    }
+    
    
 }
+    
+  
